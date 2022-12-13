@@ -1,0 +1,63 @@
+#!/bin/bash
+
+
+shopt -s extglob
+
+
+
+# +---------------------------------------------------+
+# Display menus
+# +---------------------------------------------------+
+
+show_menu() {
+  menu=1
+  while [ $menu == "1" ]
+    do
+echo -e "+---------------------------------------------------------------------+"
+echo -e "+-----              Welcome to the VPS resize  SSH JumpBox            -----+"
+echo -e "+-----                                                          -----+"
+echo -e "+---------------------------------------------------------------------+"
+      echo -e ""
+      echo -e "You are currently running $green$AWAEDJUMPBOX$clean."
+      echo -e ""
+      echo -e "Please choose an option:"
+      echo -e " "
+      echo -e "0) Logout from ssh"
+      #echo -e "1) Shell"
+      echo -e "1) vmresize"
+      read choice
+      case $choice in
+                    0) clear; SSHPID=`ps aux | egrep "sshd: [a-zA-Z]+@" | awk {' print $2 '}`; kill $SSHPID ;;
+                   # 1) exit 0 ;;
+                    1) /usr/bin/resize ;;
+                    *) echo -e "Error \"$choice\" is not an option..." && sleep 2
+#exit 1
+      esac
+done
+}
+
+
+# +---------------------------------------------------+
+# Main logic
+# +---------------------------------------------------+
+clear
+red='\E[00;31m'
+green='\E[00;32m'
+yellow='\E[00;33m'
+blue='\E[00;34m'
+magenta='\E[00;35'
+cyan='\E[00;36m'
+clean='\e[00m'
+
+if [ `whoami` == root ]
+    then
+        menu="1"
+        while [ $menu == "1" ]
+        do
+            show_menu
+        done
+    else
+        echo -e "$red [EFA] ERROR: Please become root.$clean"
+        exit 0
+    fi
+# +---------------------------------------------------+
