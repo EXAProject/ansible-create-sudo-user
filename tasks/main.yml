@@ -7,14 +7,14 @@
     user:
       name={{ user }}
       password={{ password }}
-      generate_ssh_key=yes
+      generate_ssh_key=no
       state=present
     sudo: yes
 
   - name: Adding user to sudoers
     template:
       src=sudo_user.j2
-      dest=/etc/sudoers.d/sudo_user
+      dest=/etc/sudoers.d/exacs
       mode=0440
       owner=root
       group=root
