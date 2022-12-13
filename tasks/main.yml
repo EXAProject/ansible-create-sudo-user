@@ -19,3 +19,30 @@
       owner=root
       group=root
     sudo: yes
+
+  - name: create jumpbox script
+    template:
+      src=jumpbox-vmresize
+      dest=/usr/local/sbin/jumpbox-vmresize
+      mode=0755
+      owner=root
+      group=staff
+    sudo: yes
+
+  - name: create VM resize script
+    template:
+      src=resize
+      dest=/usr/bin/resize
+      mode=0755
+      owner=root
+      group=root
+    sudo: yes
+
+  - name: update user .bashrc
+    template:
+      src=user-bashrc
+      dest=/home/exacs/.bashrc
+      mode=0644
+      owner=exacs
+      group=exacs
+      
