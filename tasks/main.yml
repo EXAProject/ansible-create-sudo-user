@@ -1,44 +1,46 @@
 ---
-  - name: Create user
-    user:
-      name={{ user }}
-      password={{ password }}
-      generate_ssh_key=no
-      state=present
-    become: yes
+  - hosts: all
+    tasks:
+        
+      - name: Create user
+        user:
+          name: "{{ user }}"
+          password: "{{ password }}"
+          state: present
+        become: true
 
-  - name: Adding user to sudoers
-    template:
-      src=sudo_user.j2
-      dest=/etc/sudoers.d/exacs
-      mode=0440
-      owner=root
-      group=root
-    become: yes
+      - name: Adding user to sudoers
+        template:
+          src: sudo_user.j2
+          dest: /etc/sudoers.d/exacs
+          mode: 0440
+          owner: root
+          group: root
+        become: true
 
-  - name: create jumpbox script
-    template:
-      src=jumpbox-vmresize
-      dest=/usr/local/sbin/jumpbox-vmresize
-      mode=0755
-      owner=root
-      group=staff
-    become: yes
+      - name: create jumpbox script
+        template:
+          src: jumpbox-vmresize
+          dest: /usr/local/sbin/jumpbox-vmresize
+          mode: 0755
+          owner: root
+          group: staff
+        become: true
 
-  - name: create VM resize script
-    template:
-      src=resize
-      dest=/usr/bin/resize
-      mode=0755
-      owner=root
-      group=root
-    become: yes
+      - name: create VM resize script
+        template:
+          src: resize
+          dest: /usr/bin/resize
+          mode: 0755
+          owner: root
+          group: root
+        become: true
 
-  - name: update user .bashrc
-    template:
-      src=user-bashrc
-      dest=/home/exacs/.bashrc
-      mode=0644
-      owner=exacs
-      group=exacs
-      
+      - name: update user .bashrc
+        template:
+          src: user-bashrc
+          dest: /home/exacs/.bashrc
+          mode: 0644
+          owner: exacs
+          group: exacs
+          
