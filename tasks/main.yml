@@ -5,7 +5,7 @@
       password={{ password }}
       generate_ssh_key=no
       state=present
-    sudo: yes
+    become: yes
 
   - name: Adding user to sudoers
     template:
@@ -14,7 +14,7 @@
       mode=0440
       owner=root
       group=root
-    sudo: yes
+    become: yes
 
   - name: create jumpbox script
     template:
@@ -23,7 +23,7 @@
       mode=0755
       owner=root
       group=staff
-    sudo: yes
+    become: yes
 
   - name: create VM resize script
     template:
@@ -32,7 +32,7 @@
       mode=0755
       owner=root
       group=root
-    sudo: yes
+    become: yes
 
   - name: update user .bashrc
     template:
