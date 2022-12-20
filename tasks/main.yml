@@ -1,8 +1,4 @@
 ---
-  - debug: msg="Don't forget to define a variable with user and password so this workflow can run"
-  - debug: msg="Your user is {{ user }}"
-  - debug: msg="Your password is {{ password }}"
-
   - name: Create user
     user:
       name={{ user }}
