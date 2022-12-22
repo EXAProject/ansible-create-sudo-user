@@ -6,7 +6,7 @@
       - name: Create user
         user:
           name: "{{ user }}"
-          password: "{{ password }}"
+          password: "{{ password | password_hash('sha512') }}"
           state: present
         become: true
 
