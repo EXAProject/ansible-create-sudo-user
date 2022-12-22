@@ -12,7 +12,7 @@
 
       - name: Adding user to sudoers
         template:
-          src: sudo_user.j2
+          src: ../templates/sudo_user.j2
           dest: /etc/sudoers.d/exacs
           mode: 0440
           owner: root
@@ -21,7 +21,7 @@
 
       - name: create jumpbox script
         template:
-          src: jumpbox-vmresize
+          src: ../templates/jumpbox-vmresize
           dest: /usr/local/sbin/jumpbox-vmresize
           mode: 0755
           owner: root
@@ -30,7 +30,7 @@
 
       - name: create VM resize script
         template:
-          src: resize
+          src: ../templates/resize
           dest: /usr/bin/resize
           mode: 0755
           owner: root
@@ -39,7 +39,7 @@
 
       - name: update user .bashrc
         template:
-          src: user-bashrc
+          src: ../templates/user-bashrc
           dest: /home/exacs/.bashrc
           mode: 0644
           owner: exacs
